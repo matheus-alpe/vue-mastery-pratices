@@ -1,1 +1,3 @@
-# Vue 3 default setup for exercises.
+# Vue 3 Default Setup
+
+- Each exercise has his own branch
