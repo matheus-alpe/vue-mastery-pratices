@@ -1,68 +1,73 @@
 <script setup>
-import { inject } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
-
-const GStore = inject('GStore')
 </script>
 
 <template>
-  <div id="layout">
-    <div v-if="GStore.flashMessage" id="flashMessage">
-      {{ GStore.flashMessage }}
-    </div>
+  <header>
+    <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/about">About</RouterLink>
+      </nav>
+  </header>
 
-    <header>
-      <div class="wrapper">
-        <nav>
-          <RouterLink :to="{ name: 'event-list' }">Events</RouterLink> |
-          <RouterLink :to="{ name: 'about' }">About</RouterLink>
-        </nav>
-      </div>
-    </header>
-    <RouterView />
-  </div>
+  <RouterView />
 </template>
 
-<style>
-@keyframes yellow-fade {
-  from {
-    background: yellow;
-  }
-
-  to {
-    background: transparent;
-  }
+<style scoped>
+header {
+  line-height: 1.5;
+  max-height: 100vh;
 }
 
-#flashMessage {
-  animation: yellow-fade 3s;
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-#layout {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 nav {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 30px;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
 }
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: var(--color-text);
 }
-h2 {
-  font-size: 20px;
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
+}
+
+nav a:first-of-type {
+  border: 0;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  nav {
+    text-align: left;
+    margin-left: -1rem;
+    font-size: 1rem;
+
+    padding: 1rem 0;
+    margin-top: 1rem;
+  }
 }
 </style>
