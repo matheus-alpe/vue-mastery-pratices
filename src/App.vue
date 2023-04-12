@@ -1,9 +1,16 @@
 <script setup>
+import { inject } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
+
+const GStore = inject('GStore')
 </script>
 
 <template>
   <div id="layout">
+    <div v-if="GStore.flashMessage" id="flashMessage">
+      {{ GStore.flashMessage }}
+    </div>
+
     <header>
       <div class="wrapper">
         <nav>
@@ -17,6 +24,24 @@ import { RouterLink, RouterView } from 'vue-router'
 </template>
 
 <style>
+@keyframes yellow-fade {
+  from {
+    background: yellow;
+  }
+
+  to {
+    background: transparent;
+  }
+}
+
+#flashMessage {
+  animation: yellow-fade 3s;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 #layout {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -25,6 +50,9 @@ import { RouterLink, RouterView } from 'vue-router'
   color: #2c3e50;
 }
 nav {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
   padding: 30px;
 }
 nav a {
