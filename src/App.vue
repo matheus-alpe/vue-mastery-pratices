@@ -1,19 +1,12 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import TodoApp from '@/components/TodoApp.vue'
 </script>
 
 <template>
-  <header>
-    <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-  </header>
-
-  <RouterView />
+  <TodoApp />
 </template>
 
-<style scoped>
+<style>
 header {
   line-height: 1.5;
   max-height: 100vh;
@@ -26,11 +19,11 @@ nav {
   margin-top: 2rem;
 }
 
-nav a.router-link-exact-active {
+nav a {
   color: var(--color-text);
 }
 
-nav a.router-link-exact-active:hover {
+nav a:hover {
   background-color: transparent;
 }
 

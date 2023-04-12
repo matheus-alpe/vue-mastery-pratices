@@ -1,3 +1,1 @@
-# Vue 3 Default Setup
-
-- Each exercise has his own branch
+# Vue 3 Todo APP with Pinia
