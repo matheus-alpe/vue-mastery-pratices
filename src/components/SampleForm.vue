@@ -1,4 +1,6 @@
 <script>
+import api from '@/services/api'
+
 export default {
   name: 'SampleForm',
 
@@ -31,6 +33,12 @@ export default {
         { label: 'No', value: 0 }
       ]
     }
+  },
+
+  methods: {
+    sendForm() {
+      api.post('/events', this.event).then(console.log).catch(console.error)
+    }
   }
 }
 </script>
@@ -42,7 +50,7 @@ export default {
     </code>
 
     <h1>Create an event</h1>
-    <form>
+    <form @submit.prevent="sendForm">
       <BaseSelect
         v-model="event.category"
         :options="categories"
