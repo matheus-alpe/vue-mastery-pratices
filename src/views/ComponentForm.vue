@@ -1,38 +1,41 @@
 <template>
   <div>
     <h1>Create an Event</h1>
-    <form @submit.prevent="createEvent">
+    <form @submit.prevent="submit">
       <BaseSelect
         label="Select a category"
         :options="categories"
-        v-model="event.category"
-        error="This field is required"
+        v-model="category"
+        :error="errors.category"
       />
 
       <h3>Name & describe your event</h3>
       <BaseInput
         label="Title"
-        v-model="event.title"
+        v-model="title"
+        :error="errors.title"
         type="text"
-        error="This field is required"
       />
 
       <BaseInput
         label="Description"
-        v-model="event.description"
+        v-model="description"
+        :error="errors.description"
         type="text"
       />
 
       <h3>Where is your event?</h3>
       <BaseInput
         label="Location"
-        v-model="event.location"
+        v-model="location"
+        :error="errors.location"
         type="text"
       />
 
       <h3>Are pets allowed?</h3>
       <BaseRadioGroup
-        v-model="event.pets"
+        v-model="pets"
+        :error="errors.pets"
         name="pets"
         :options="[
           { value: 1, label: 'Yes' },
@@ -40,30 +43,20 @@
         ]"
       />
 
-      <template v-if="event.pets === 0">
-        <h3>Are you sure? 🐶</h3>
-        <BaseRadioGroup
-          v-model="event.petsagain"
-          name="petsagain"
-          :options="[
-            { value: 1, label: 'Yes' },
-            { value: 0, label: 'No' }
-          ]"
-        />
-      </template>
-
       <h3>Extras</h3>
       <div>
         <BaseCheckbox
           label="Catering"
-          v-model="event.extras.catering"
+          v-model="catering"
+          :error="errors.catering"
         />
       </div>
 
       <div>
         <BaseCheckbox
           label="Live music"
-          v-model="event.extras.music"
+          v-model="music"
+          :error="errors.music"
         />
       </div>
 
@@ -77,12 +70,12 @@
         </BaseButton>
       </div>
     </form>
-
-    <pre>{{ event }}</pre>
   </div>
 </template>
 
 <script>
+import { useForm, useField } from 'vee-validate'
+
 export default {
   data() {
     return {
@@ -94,23 +87,78 @@ export default {
         'education',
         'food',
         'community'
-      ],
-      event: {
-        category: '',
-        title: '',
-        description: '',
-        location: '',
-        pets: 1,
-        extras: {
-          catering: false,
-          music: false
-        }
-      }
+      ]
     }
   },
-  methods: {
-    createEvent() {
-      console.log('submit')
+
+  setup() {
+    const required = (value) => {
+      const requiredMessage = 'This field is required'
+      if (value === undefined || value === null) return requiredMessage
+      if (!String(value).length) return requiredMessage
+
+      return true
+    }
+
+    const minLength = (number, value) => {
+      if (String(value).length < number) return 'Please type at least ' + number + ' characters'
+
+      return true
+    }
+
+    const anything = () => {
+      return true
+    }
+
+    const validationSchema = {
+      category: required,
+      title: (value) => {
+        const requiredResponse = required(value)
+        if (requiredResponse !== true) return requiredResponse
+
+        const hasMinLength = minLength(3, value)
+        if (hasMinLength !== true) return hasMinLength
+
+        return true
+      },
+      description: required,
+      location: undefined,
+      pet: anything,
+      catering: anything,
+      music: anything
+    }
+
+    const { handleSubmit, errors } = useForm({
+      validationSchema,
+      initialValues: {
+        pets: 1,
+        catering: false,
+        music: false
+      }
+    })
+
+    const { value: category } = useField('category')
+    const { value: title } = useField('title')
+    const { value: description } = useField('description')
+    const { value: location } = useField('location')
+    const { value: pets } = useField('pets')
+    const { value: catering } = useField('catering')
+    const { value: music } = useField('music')
+
+    const submit = handleSubmit((values) => {
+      console.log('submit', values)
+    })
+
+    return {
+      submit,
+      category,
+      title,
+      description,
+      location,
+      pets,
+      catering,
+      music,
+      errors
     }
   }
 }
