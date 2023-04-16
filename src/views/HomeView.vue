@@ -1,9 +1,9 @@
 <script setup>
-import HelloWorld from '../components/HelloWorld.vue'
+import SampleForm from '../components/SampleForm.vue'
 </script>
 
 <template>
   <main>
-    <HelloWorld msg="Welcome"/>
+    <SampleForm msg="Welcome" />
   </main>
 </template>
