@@ -1,14 +1,6 @@
 <script>
-import BaseInput from './BaseInput.vue'
-import BaseSelect from './BaseSelect.vue'
-
 export default {
   name: 'SampleForm',
-
-  components: {
-    BaseInput,
-    BaseSelect
-  },
 
   data() {
     return {
