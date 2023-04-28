@@ -1,42 +1,34 @@
-<script lang="ts" setup>
-interface Response {
-  data: Coin[]
-}
-
-const { data } = await useFetch<Response>('/api/tickers/?limit=10')
+<script setup>
+const isAuthenticated = useCookie('is-authenticated')
+const currentUser = useCookie('current-user')
 </script>
 
 <template>
-  <main>
-    <h1>Index Page</h1>
-
-    <ClientOnly>
-      <table
-        border="1 px solid"
-        v-if="data"
-      >
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Symbol</th>
-            <th>Price</th>
-            <th>Details</th>
-          </tr>
-        </thead>
-        <tr
-          v-for="currency in data.data"
-          :key="currency.id"
-        >
-          <td>{{ currency.name }}</td>
-          <td>{{ currency.symbol }}</td>
-          <td>{{ currency.price_usd }}</td>
-          <td>
-            <NuxtLink :to="'/currency/' + currency.id">{{ currency.id }}</NuxtLink>
-          </td>
-        </tr>
-      </table>
-
-      <template #placeholder> Loading... </template>
-    </ClientOnly>
-  </main>
+  <article class="grid">
+    <div>
+      <hgroup>
+        <h1>Home</h1>
+        <p>A minimalist home page</p>
+      </hgroup>
+      <p>Authenticated: {{ isAuthenticated }}</p>
+      <p>Current User: {{ currentUser }}</p>
+    </div>
+    <div>
+      <hgroup>
+        <h2>Navigation</h2>
+        <p>Simple navigation links for testing</p>
+      </hgroup>
+      <ul>
+        <li>
+          <nuxt-link to="/login">Login</nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/profile/"> Current User </nuxt-link>
+        </li>
+        <li>
+          <nuxt-link to="/profile/undefined-user"> Profile: Undefined User </nuxt-link>
+        </li>
+      </ul>
+    </div>
+  </article>
 </template>

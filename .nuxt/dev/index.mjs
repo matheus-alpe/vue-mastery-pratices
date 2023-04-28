@@ -487,16 +487,9 @@ const errorHandler = (async function errorhandler(error, event) {
   event.node.res.end(await res.text());
 });
 
-const _VuSaQQ = defineEventHandler((event) => {
-  console.log(new Date(Date.now()).toLocaleString(), "->", event.node.req.url);
-});
-
-const _lazy_yRuRQ7 = () => Promise.resolve().then(function () { return _____$1; });
 const _lazy_03GInG = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
-  { route: '', handler: _VuSaQQ, lazy: false, middleware: true, method: undefined },
-  { route: '/api/**', handler: _lazy_yRuRQ7, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_error', handler: _lazy_03GInG, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_03GInG, lazy: true, middleware: false, method: undefined }
 ];
@@ -622,15 +615,6 @@ const template = _template;
 const errorDev = /*#__PURE__*/Object.freeze({
       __proto__: null,
       template: template
-});
-
-const _____ = defineEventHandler((event) => {
-  return $fetch(`https://api.coinlore.net${event.node.req.url}`);
-});
-
-const _____$1 = /*#__PURE__*/Object.freeze({
-      __proto__: null,
-      default: _____
 });
 
 const appRootId = "__nuxt";

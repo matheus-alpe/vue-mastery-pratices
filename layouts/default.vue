@@ -1,8 +1,9 @@
 <template>
-  <nav>
-    <NuxtLink to="/">Home</NuxtLink>
-  </nav>
-  <main>
-    <slot />
-  </main>
+  <div id="default-layout">
+    <TheHeader />
+    <main class="container">
+      <slot />
+    </main>
+    <TheFooter />
+  </div>
 </template>
