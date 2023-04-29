@@ -19,7 +19,7 @@ const loginUser = () => {
 </script>
 
 <template>
-  <form @submit.prevent>
+  <form @submit.prevent="loginUser">
     <input
       v-model="userInput.username"
       type="text"
@@ -39,7 +39,6 @@ const loginUser = () => {
       required
     />
     <button
-      @click="loginUser"
       type="submit"
       class="contrast"
     >
