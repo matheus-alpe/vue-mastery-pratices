@@ -3,6 +3,8 @@ import { ref, computed } from 'vue'
 import socksBlueImage from '../assets/socks_blue.jpg'
 import socksGreenImage from '../assets/socks_green.jpg'
 
+import PrettyButton from './PrettyButton.vue'
+
 const props = defineProps({
   premium: {
     type: Boolean,
@@ -55,7 +57,7 @@ function updateVariant(index) {
     <div class="flex flex-row flex-wrap">
       <div class="w-[100%] md:w-[50%]">
         <img 
-          class="w-[70%] m-10 p-4 border-2 border-solid border-[#d8d8d8]"
+          class="w-[70%] m-10 p-4 mist-border-2"
           :src="image">
       </div>
 
@@ -69,7 +71,7 @@ function updateVariant(index) {
         </ul>
         <div 
           v-for="(variant, index) in variants" 
-          class="w-12 h-12 mt-2 border-2 border-solid border-[#d8d8d8] rounded-full" 
+          class="w-12 h-12 mt-2 mist-border-2 rounded-full" 
           :class="{
             green: 'bg-[green]',
             blue: 'bg-[blue]',
@@ -79,16 +81,12 @@ function updateVariant(index) {
         >
         </div>
         
-        <button 
-          class="w-40 h-15 m-7 p-5 text-lg leading-none text-white text-center rounded  btn-shading-bn"
-          :class="inStock
-          ? ['bg-[#39495c]', 'cursor-pointer']
-          : ['bg-[#d8d8d8]', 'cursor-not-allowed']" 
-          :disabled="!inStock" 
+        <PrettyButton 
+          :is-active="inStock"
           @click="addToCart"
         >
           Add to Cart
-        </button>
+        </PrettyButton>
       </div>
     </div>
   </div>
