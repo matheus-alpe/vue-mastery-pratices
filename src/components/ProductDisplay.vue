@@ -51,12 +51,15 @@ function updateVariant(index) {
 </script>
 
 <template>
-  <div class="product-display">
-    <div class="product-container">
-      <div class="product-image">
-        <img v-bind:src="image">
+  <div class="p-4">
+    <div class="flex flex-row flex-wrap">
+      <div class="w-[100%] md:w-[50%]">
+        <img 
+          class="w-[70%] m-10 p-4 border-2 border-solid border-[#d8d8d8]"
+          :src="image">
       </div>
-      <div class="product-info">
+
+      <div class="w-[100%] md:w-[50%] ml-3 md:ml-0">
         <h1>{{ title }}</h1>
         <p v-if="inStock">In Stock</p>
         <p v-else>Out of Stock</p>
@@ -66,16 +69,21 @@ function updateVariant(index) {
         </ul>
         <div 
           v-for="(variant, index) in variants" 
-          class="color-circle" 
-          :style="{ backgroundColor: variant.color }"
+          class="w-12 h-12 mt-2 border-2 border-solid border-[#d8d8d8] rounded-full" 
+          :class="{
+            green: 'bg-[green]',
+            blue: 'bg-[blue]',
+          }[variant.color]"
           :key="variant.id" 
           @mouseover="updateVariant(index)" 
         >
         </div>
         
         <button 
-          class="button" 
-          :class="{ disabled: !inStock }" 
+          class="w-40 h-15 m-7 p-5 text-lg leading-none text-white text-center rounded  btn-shading-bn"
+          :class="inStock
+          ? ['bg-[#39495c]', 'cursor-pointer']
+          : ['bg-[#d8d8d8]', 'cursor-not-allowed']" 
           :disabled="!inStock" 
           @click="addToCart"
         >
@@ -85,74 +93,3 @@ function updateVariant(index) {
     </div>
   </div>
 </template>
-
-<style scoped>
-
-.product-display {
-  padding: 16px;
-}
-
-.product-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.product-image {
-  width: 100%;
-}
-
-img {
-  width: 70%;
-  margin: 40px;
-  padding: 15px;
-  border: 2px solid #d8d8d8;
-}
-
-.product-info {
-  width: 100%;
-  margin-left: 10px;
-}
-
-.color-circle {
-  width: 50px;
-  height: 50px;
-  margin-top: 8px;
-  border: 2px solid #d8d8d8;
-  border-radius: 50%;
-}
-
-.button {
-  width: 160px;
-  height: 60px;
-  margin: 30px;
-  padding: 20px;
-  font-size: 18px;
-  color: white;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17),
-    inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15),
-    inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
-  
-  background-color: #39495c;
-  cursor: pointer;
-}
-
-.button.disabled {
-  background-color: #d8d8d8;
-  cursor: not-allowed;
-}
-
-@media only screen and (min-width: 860px) {
-
-  .product-image {
-    width: 50%;
-  }
-
-  .product-info {
-    width: 50%;
-    margin-left: 0;
-  }
-} 
-</style>
