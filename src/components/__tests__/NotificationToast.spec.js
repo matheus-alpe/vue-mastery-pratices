@@ -4,6 +4,21 @@ import { mount } from '@vue/test-utils'
 import NotificationToast from '../NotificationToast.vue'
 
 describe('NotificationToast', () => {
+  it('renders the correct style for error (with snapshot)', () => {
+    const status = 'error'
+    const wrapper = mount(NotificationToast, {
+      props: {
+        status,
+      }
+    })
+
+    // expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toMatchInlineSnapshot(`
+      "<div role=\\"alert\\" class=\\"notification notification--error\\">
+        <p class=\\"notification__text\\"></p><button title=\\"close\\" class=\\"notification__button\\"> ✕ </button>
+      </div>"
+    `)
+  })
 
   it('renders the correct style for error', () => {
     const status = 'error'
