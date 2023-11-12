@@ -22,8 +22,13 @@ defineProps({
         <p class="notification__text">
             {{ message }}
         </p>
-        <button title="close" ref="closeButton" class="notification__button" 
-            @click="$emit('clear-notification')">
+        <button
+          ref="closeButton"
+          data-testid="close-notification"
+          title="close"
+          class="notification__button" 
+          @click="$emit('clear-notification')"
+        >
             &#10005;
         </button>
     </div>

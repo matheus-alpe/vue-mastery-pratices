@@ -15,7 +15,7 @@ describe('NotificationToast', () => {
     // expect(wrapper.html()).toMatchSnapshot()
     expect(wrapper.html()).toMatchInlineSnapshot(`
       "<div role=\\"alert\\" class=\\"notification notification--error\\">
-        <p class=\\"notification__text\\"></p><button title=\\"close\\" class=\\"notification__button\\"> ✕ </button>
+        <p class=\\"notification__text\\"></p><button data-testid=\\"close-notification\\" title=\\"close\\" class=\\"notification__button\\"> ✕ </button>
       </div>"
     `)
   })
