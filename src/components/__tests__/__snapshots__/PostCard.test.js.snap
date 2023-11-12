@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`PostCard > created posts render correctly 1`] = `
-"<div tile=\\"Post title\\">
-  <h1></h1>
+"<div>
+  <h1>Post title</h1>
   <p>Post body</p>
 </div>"
 `;

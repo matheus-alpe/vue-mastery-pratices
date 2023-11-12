@@ -6,7 +6,7 @@ describe('PostCard', () => {
   test('created posts render correctly', async () => {
     const wrapper = mount(PostCard, {
       props: {
-        tile: 'Post title',
+        title: 'Post title',
         body: 'Post body',
       }
     })
